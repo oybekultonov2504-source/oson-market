@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0d0f13">
-<title>Oson Market v5</title>
+<title>Oson Market v7</title>
 <style>
 :root{
   --bg:#0d0f13;--panel:#171a20;--panel2:#20242b;--soft:#2a2f37;--text:#f7f8fb;
@@ -61,7 +61,7 @@ button:active,.quick-item:active,.card:active,.mini:active{transform:scale(.97)}
 .nav{background:none;color:#90959d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;position:relative;transition:.2s var(--spring)}.nav .nicon{font-size:22px}.nav.active{color:#168cff}.cart-count{position:absolute;top:8px;right:22%;min-width:18px;height:18px;border-radius:9px;background:#ff1878;color:#fff;font-size:10px;display:grid;place-items:center;padding:0 5px}
 .profile-fab{position:fixed;right:max(14px,calc((100vw - 470px)/2 + 14px));bottom:88px;width:46px;height:46px;border-radius:50%;background:#168cff;color:#fff;z-index:49;font-size:20px;box-shadow:0 12px 30px #0084ff50;transition:.2s var(--spring)}
 .toast{position:fixed;left:50%;transform:translateX(-50%) translateY(14px);bottom:92px;background:#f7f8fa;color:#111;padding:10px 14px;border-radius:12px;font-weight:800;font-size:13px;opacity:0;pointer-events:none;transition:.3s var(--spring);z-index:120;max-width:88%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.modal{position:fixed;inset:0;background:#0000;z-index:100;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .28s}.modal.open{background:#000b;pointer-events:auto}.sheet{width:100%;max-width:470px;background:#181b20;border-radius:28px 28px 0 0;padding:16px;max-height:88vh;overflow:auto;transform:translateY(110%);transition:transform .42s var(--spring)}.modal.open .sheet{transform:none}.sheet img{width:100%;max-height:360px;object-fit:cover;border-radius:20px;background:#eef2f7}.sheet h2{margin:13px 0 6px}.sheet p{color:#afb5bd}.close{float:right;width:36px;height:36px;border-radius:50%;background:#2a2f36;color:#fff}.buy{width:100%;height:50px;border-radius:15px;background:#0d7df0;color:#fff;font-weight:900;transition:.2s var(--spring)}.ghost-share{height:44px;border-radius:12px;background:#2b3037;color:#fff;font-weight:800}.fly{position:fixed;z-index:200;width:18px;height:18px;border-radius:50%;background:#168cff;box-shadow:0 0 0 7px #168cff28;pointer-events:none;transition:transform .72s var(--spring),opacity .72s}.cart-count.bump{animation:bump .38s var(--spring)}
+.modal{position:fixed;inset:0;background:#0000;z-index:100;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .28s}.modal.open{background:#000b;pointer-events:auto}.sheet{width:100%;max-width:470px;background:#181b20;border-radius:28px 28px 0 0;padding:16px;max-height:88vh;overflow:auto;transform:translateY(110%);transition:transform .42s var(--spring)}.modal.open .sheet{transform:none}.sheet img{display:block;width:100%;aspect-ratio:4/5;max-height:none;object-fit:cover;object-position:center;border-radius:20px;background:#eef2f7}.sheet h2{margin:13px 0 6px}.sheet p{color:#afb5bd}.close{float:right;width:36px;height:36px;border-radius:50%;background:#2a2f36;color:#fff}.buy{width:100%;height:50px;border-radius:15px;background:#0d7df0;color:#fff;font-weight:900;transition:.2s var(--spring)}.ghost-share{height:44px;border-radius:12px;background:#2b3037;color:#fff;font-weight:800}.fly{position:fixed;z-index:200;width:18px;height:18px;border-radius:50%;background:#168cff;box-shadow:0 0 0 7px #168cff28;pointer-events:none;transition:transform .72s var(--spring),opacity .72s}.cart-count.bump{animation:bump .38s var(--spring)}
 .empty{grid-column:1/-1;padding:55px 20px;text-align:center;color:#9ca3af}
 @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
 @keyframes bump{40%{transform:scale(1.32)}}
@@ -77,12 +77,11 @@ button:active,.quick-item:active,.card:active,.mini:active{transform:scale(.97)}
   <section class="top">
     <div class="topline">
       <div>
-        <div class="brand"><div class="logo">O</div> Oson Market <span class="ver">v5</span></div>
+        <div class="brand"><div class="logo">O</div> Oson Market <span class="ver">v7</span></div>
         <div class="location" onclick="toast('Доставка: Адрасман')">Адрасман · доставка по посёлку ▾</div>
       </div>
-      <div class="wallet"><div class="pill">O 2 150</div><button class="chat" onclick="openSupport()">💬<span class="badge">1</span></button></div>
     </div>
-    <div class="search"><span>⌕</span><input id="search" placeholder="Искать на Oson Market"><button id="clearSearch" class="clear-search" onclick="clearSearch()">×</button></div>
+    <div class="search"><span>⌕</span><input id="search" type="search" name="oson_search" placeholder="Искать на Oson Market" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="search"><button id="clearSearch" class="clear-search" onclick="clearSearch()">×</button></div>
     <div class="hero" id="heroAd">
       <div class="hero-copy"><h1 id="heroTitle">Дарим подарки за добрые дела</h1><p id="heroSubtitle">Новые предложения каждую неделю</p><button class="cta" id="heroButton">Участвовать ›</button></div>
     </div>
@@ -151,7 +150,7 @@ const SUPABASE_URL="https://offfszmraudijnbrxtwx.supabase.co";
 const SUPABASE_KEY="sb_publishable_3caLy5hf8WzH_L-TzVm_Hw_WEYIXZCq";
 const WHATSAPP="992928041517";
 const HEADERS={"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Accept":"application/json"};
-const STORE_KEY="oson_market_state_v5";
+const STORE_KEY="oson_market_state_v7";
 
 let products=[], ads=[], mode="all", activeCat="all", query="", current=null, modalQtyN=1;
 let state={cart:{},fav:[],recent:[]};
@@ -175,10 +174,10 @@ async function getJSON(url){
 async function loadData(){
   try{
     const [pRows,aRows]=await Promise.all([
-      getJSON(`${SUPABASE_URL}/rest/v1/products?select=id,name,description,category,price,old_price,stock,image_url,image_urls,rating,featured,created_at&active=eq.true&stock=gt.0&order=featured.desc,created_at.desc`),
+      getJSON(`${SUPABASE_URL}/rest/v1/products?select=id,name,description,category,price,old_price,stock,image_url,image_urls,rating,featured,sort_order,created_at&active=eq.true&stock=gt.0&order=sort_order.asc,featured.desc,created_at.desc`),
       getJSON(`${SUPABASE_URL}/rest/v1/ads?select=*&active=eq.true&order=sort_order.asc,created_at.desc`)
     ]);
-    products=pRows.map(p=>({id:String(p.id),name:p.name||"Без названия",description:p.description||"",category:p.category||"Другое",price:Number(p.price||0),old:Number(p.old_price||0),stock:Number(p.stock||0),rating:Number(p.rating||5),featured:!!p.featured,created_at:p.created_at||"",img:p.image_url||(Array.isArray(p.image_urls)?p.image_urls[0]:"")||""}));
+    products=pRows.map(p=>({id:String(p.id),name:p.name||"Без названия",description:p.description||"",category:p.category||"Другое",price:Number(p.price||0),old:Number(p.old_price||0),stock:Number(p.stock||0),rating:Number(p.rating||5),featured:!!p.featured,sort_order:Number(p.sort_order||0),created_at:p.created_at||"",img:p.image_url||(Array.isArray(p.image_urls)?p.image_urls[0]:"")||""}));
     ads=aRows||[];
     cleanupState();renderCategories();applyAds();render();updateCounts();
   }catch(e){
@@ -200,15 +199,16 @@ function adLiveRows(){
 }
 function setHeroAd(a){
   if(!a)return;
-  const el=$("heroAd"), overlay=a.show_overlay!==false;
-  el.classList.toggle("no-overlay",!overlay);
+  const el=$("heroAd");
+  el.classList.add("no-overlay");
   el.style.backgroundImage=`url("${a.image_url||""}")`;
   el.style.backgroundSize=a.image_fit==="contain"?"contain":"cover";
   el.style.backgroundRepeat="no-repeat";
+  el.style.backgroundPosition="center";
   el.style.backgroundColor="#101319";
-  $("heroTitle").textContent=a.title||"";
-  $("heroSubtitle").textContent=a.subtitle||"";
-  $("heroButton").textContent=(a.button_text||"Смотреть")+" ›";
+  $("heroTitle").textContent="";
+  $("heroSubtitle").textContent="";
+  $("heroButton").textContent="";
   $("heroButton").onclick=()=>document.querySelector(".grid")?.scrollIntoView({behavior:"smooth"});
 }
 function applyAds(){
@@ -281,6 +281,14 @@ function renderCart(){
 function qty(id,d){id=String(id);const p=productById(id);if(!p)return;const n=(state.cart[id]||0)+d;if(n<=0)delete state.cart[id];else if(n<=p.stock)state.cart[id]=n;else toast("Доступно только "+p.stock+" шт.");save();renderCart();render()}
 function removeCart(id){delete state.cart[String(id)];save();renderCart();render()}
 function renderRecent(){$("recentStrip").innerHTML=state.recent.map(id=>{const p=productById(id);return p?`<div class="mini" onclick='openProduct(${js(id)})'><img src="${esc(p.img)}"><b>${money(p.price)}</b><span>${esc(p.name)}</span></div>`:""}).join("")||'<span style="color:#9ca3af">Откройте товар — он появится здесь</span>'}
+function goHome(){
+  const a=document.activeElement;if(a&&typeof a.blur==="function")a.blur();
+  closeModal();
+  mode="all";activeCat="all";query="";
+  $("search").value="";$("clearSearch").style.display="none";
+  renderCategories();render();setView("home");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 function setView(v){
   ["home","profile","cart","bonus"].forEach(x=>$(x+"View").style.display=x===v?"block":"none");
   document.querySelectorAll(".nav[data-view]").forEach(n=>n.classList.toggle("active",n.dataset.view===v));
@@ -307,9 +315,13 @@ function checkout(){
   location.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text);
 }
 $("search").addEventListener("input",e=>{query=e.target.value;mode="all";$("clearSearch").style.display=query?"block":"none";render()});
-$("searchNav").onclick=()=>{setView("home");setTimeout(()=>$("search").focus(),120)};
+$("searchNav").onclick=()=>{
+  setView("home");
+  const a=document.activeElement;if(a&&typeof a.blur==="function")a.blur();
+  $("search").scrollIntoView({behavior:"smooth",block:"center"});
+};
 $("favNav").onclick=showFavorites;
-document.querySelectorAll(".nav[data-view]").forEach(n=>n.onclick=()=>setView(n.dataset.view));
+document.querySelectorAll(".nav[data-view]").forEach(n=>n.onclick=()=>n.dataset.view==="home"?goHome():setView(n.dataset.view));
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 updateCounts();loadData().then(()=>{try{const id=new URLSearchParams(location.search).get("p");if(id)openProduct(id)}catch(_){}});
 </script>
