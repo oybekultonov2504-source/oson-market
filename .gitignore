@@ -1,0 +1,15 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Temporary
+*.tmp
+*.bak
