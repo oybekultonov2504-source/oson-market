@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d0f13">
+<title>Oson Market v4</title>
+<style>
+:root{
+  --bg:#0d0f13;--panel:#171a20;--panel2:#20242b;--soft:#2a2f37;--text:#f7f8fb;
+  --muted:#9da4af;--blue:#168cff;--blue2:#066ee9;--pink:#ff1f7a;--green:#38d98a;
+  --yellow:#ffbd2e;--border:rgba(255,255,255,.075);--spring:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:#07090c;scroll-behavior:smooth}
+body{margin:0;background:#07090c;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;justify-content:center;min-height:100vh}
+button,input{font:inherit}button{border:0;color:inherit}
+button:active,.quick-item:active,.card:active,.mini:active{transform:scale(.97)}
+.app{width:100%;max-width:470px;min-height:100vh;background:var(--bg);padding-bottom:84px;position:relative;overflow:hidden}
+.top{padding:18px 16px 0;background:linear-gradient(160deg,#086cf2 0%,#188ff7 54%,#91d8ff 100%);border-radius:0 0 34px 34px}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:19px}.ver{font-size:10px;padding:4px 7px;border-radius:8px;background:#ffffff28;color:#fff}
+.logo{width:38px;height:38px;border-radius:13px;background:#fff;color:#087bf5;display:grid;place-items:center;font-weight:950;box-shadow:0 6px 18px #0064d36b}
+.location{font-size:14px;color:#eef7ff;opacity:.96;cursor:pointer}.wallet{display:flex;gap:8px;align-items:center}.pill{background:#fff;color:#12161c;padding:7px 10px;border-radius:13px;font-weight:800;font-size:13px}
+.chat{width:38px;height:38px;border-radius:12px;background:#fffffff2;display:grid;place-items:center;color:#111;position:relative;transition:.2s var(--spring)}
+.badge{position:absolute;right:-4px;top:-5px;min-width:19px;height:19px;border-radius:50%;padding:0 5px;background:#111;color:#fff;font-size:11px;display:grid;place-items:center;border:2px solid #fff}
+.search{background:#fff;border-radius:18px;height:54px;display:flex;align-items:center;gap:10px;padding:0 16px;color:#a8b0ba;box-shadow:0 8px 30px #0050a92d;transition:.2s}
+.search:focus-within{box-shadow:0 10px 34px #0054b94d;transform:translateY(-1px)}.search input{border:0;outline:none;flex:1;font-size:17px;min-width:0;background:transparent}
+.clear-search{background:none;color:#777;font-size:18px;display:none}
+.hero{margin-top:18px;aspect-ratio:16/9;min-height:0;display:flex;align-items:flex-end;justify-content:space-between;padding:18px 18px 20px;position:relative;overflow:hidden;border-radius:24px 24px 34px 34px;background:linear-gradient(135deg,#168cff,#72caff);background-size:cover;background-position:center}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,10,20,.55),rgba(5,10,20,.12))}
+.hero-copy{max-width:72%;z-index:2}.hero h1{font-size:27px;line-height:1.03;margin:0 0 8px;letter-spacing:-.6px}.hero p{margin:0 0 12px;color:#f0f7ff;font-size:14px}.cta{padding:10px 14px;border-radius:11px;background:#10141a;color:#fff;font-weight:850;transition:.2s var(--spring)}
+.section{padding:14px 14px 0}
+.banner{background:linear-gradient(135deg,#ff2e8e,#ab0c6e 45%,#1c1345);background-size:cover;background-position:center;border-radius:22px;padding:18px;min-height:135px;box-shadow:0 12px 30px rgba(0,0,0,.22);overflow:hidden;position:relative}
+.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,5,18,.58),rgba(10,5,18,.04))}
+.banner>*{position:relative;z-index:2}.banner small{color:#ffd6e8;font-weight:700}.banner h2{font-size:22px;line-height:1.05;margin:6px 0 8px;max-width:76%}.banner p{font-size:13px;color:#ffdce9;max-width:72%;margin:0}
+.quick{display:flex;gap:12px;overflow:auto;padding:16px 14px 8px;scrollbar-width:none}.quick::-webkit-scrollbar{display:none}
+.quick-item{min-width:72px;text-align:center;color:#f3f4f6;font-size:12px;cursor:pointer;transition:transform .18s var(--spring),opacity .2s}
+.qicon{width:62px;height:62px;margin:auto auto 6px;border-radius:18px;background:linear-gradient(145deg,#1d9bff,#076ce5);display:grid;place-items:center;font-size:28px;box-shadow:inset 0 0 0 1px #ffffff30,0 10px 20px #005dba30}
+.title-row{display:flex;justify-content:space-between;align-items:end;margin:10px 14px}.title-row h2{margin:0;font-size:22px}.title-row button{background:none;color:#55a7ff;font-weight:800}
+.mode-label{padding:0 14px 8px;color:#8f98a4;font-size:12px;display:none}
+.chips{display:flex;gap:8px;overflow:auto;padding:0 14px 12px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;padding:9px 12px;border-radius:13px;background:var(--panel2);color:#d7dbe2;font-size:13px;transition:.2s var(--spring)}.chip.active{background:#fff;color:#111;font-weight:850}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#101216;min-height:220px}
+.card{background:#171a1f;min-width:0;padding-bottom:12px;position:relative;animation:pop .38s var(--spring) both;transition:transform .18s var(--spring),filter .18s}.image-wrap{background:#eef2f7;aspect-ratio:1/1.22;overflow:hidden;position:relative}
+.image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s var(--spring)}.card:active .image-wrap img{transform:scale(1.02)}
+.fav{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:#ffffffed;color:#111;font-size:20px;display:grid;place-items:center;transition:.2s var(--spring)}.fav.on{color:#ff1776}.fav.bump{animation:bump .38s var(--spring)}
+.card-body{padding:10px 12px 0}.price{font-size:20px;font-weight:900;color:var(--pink)}.old{font-size:13px;color:#777;text-decoration:line-through;margin-left:4px}.stock{font-size:13px;font-weight:800;color:#ff3b82;margin:5px 0 7px}.name{font-size:15px;line-height:1.22;min-height:37px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.meta{font-size:12px;color:#aeb4bd;margin-top:7px}.star{color:var(--yellow)}
+.add{margin-top:10px;width:100%;padding:10px;border-radius:11px;background:#0c7ff2;color:#fff;font-weight:850;transition:.2s var(--spring)}.add.incart{background:#2b3038}
+.skeleton{min-height:330px;background:linear-gradient(100deg,#171a1f 20%,#252a32 40%,#171a1f 60%);background-size:200% 100%;animation:shim 1.2s infinite}
+.profile-view,.cart-view,.bonus-view{display:none;animation:fadeIn .3s var(--spring)}
+.profile-head{padding:18px 16px 12px;display:flex;align-items:center;justify-content:space-between}.person{display:flex;align-items:center;gap:12px}.avatar{width:58px;height:58px;background:#2b2f36;border-radius:18px;display:grid;place-items:center;font-weight:900;color:#9aa1aa}.person h2{margin:0 0 3px;font-size:19px}.person p{margin:0;color:#9da4ae;font-size:13px}
+.profile-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px 14px}.pcard{background:#24282f;border-radius:20px;padding:14px 10px;min-height:108px;cursor:pointer;transition:.2s var(--spring)}.pcard b{display:block;font-size:14px;margin-top:18px}.pcard span{font-size:12px;color:#a8adb5}
+.big-card{margin:2px 14px 12px;background:#1d2026;border-radius:28px;padding:20px;position:relative;overflow:hidden}.big-card h3{margin:0;font-size:24px}.big-card p{color:#a9aeb6;margin:6px 0 14px}.cta2{background:#403783;color:#d9d5ff;padding:9px 13px;border-radius:10px;font-weight:800}.money{position:absolute;right:-10px;bottom:-20px;font-size:92px;transform:rotate(-14deg)}
+.finance{margin:0 14px 12px;background:#1d2026;border-radius:28px;padding:18px}.finance h3{font-size:23px;margin:0 0 12px}.finance-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fbox{background:#2b2f35;border-radius:18px;padding:14px;min-height:92px}.fbox small{color:#a6abb2}.fbox b{display:block;margin-top:8px;font-size:18px}
+.recent{margin:0 14px;background:#1d2026;border-radius:26px;padding:18px}.recent h3{margin:0 0 12px;font-size:22px}.recent-strip{display:flex;gap:10px;overflow:auto}.mini{min-width:128px;cursor:pointer}.mini img{width:128px;height:150px;object-fit:cover;border-radius:14px}.mini b{display:block;margin-top:5px;color:var(--pink)}.mini span{font-size:12px;color:#aab0b8}
+.cart-view{padding:18px 14px 24px}.cart-view h2{margin:0 0 14px}.cart-item{display:grid;grid-template-columns:78px minmax(0,1fr) 38px;gap:12px;background:#1a1d22;border-radius:18px;padding:12px;margin-bottom:10px;animation:pop .3s var(--spring);align-items:start}.cart-item img{width:78px;height:104px;border-radius:12px;object-fit:cover}.cart-item .ci{min-width:0}.ci-name{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ci-unit{font-size:12px;color:#969da8;margin-top:3px}.ci-sum{font-size:13px;color:#43df94;font-weight:850;margin-top:5px}.qty{display:grid;grid-template-columns:34px 30px 34px;gap:7px;align-items:center;margin-top:10px;width:max-content}.qty button{width:34px;height:34px;border-radius:10px;background:#2b3037;color:#fff}.qty b{text-align:center}.remove{width:38px;height:38px;border-radius:11px;background:#2b3037;color:#ff7185;display:grid;place-items:center;padding:0;font-size:17px;align-self:start}
+.checkout{position:sticky;bottom:83px;background:linear-gradient(180deg,transparent,var(--bg) 35%);padding-top:28px}.checkout button{width:100%;height:50px;border-radius:15px;background:#0d7df0;color:#fff;font-weight:900;font-size:16px}
+.bonus-wrap{padding:18px 14px}.bonus-card{border-radius:24px;padding:20px;background:linear-gradient(135deg,#6322ca,#148cff);margin-bottom:12px}.bonus-card h2{margin:0 0 7px}.bonus-card p{color:#e8dcff}.bonus-card button{background:#fff;color:#111;padding:10px 14px;border-radius:11px;font-weight:850}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:470px;height:76px;background:#1a1d22;border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);z-index:50;padding-bottom:env(safe-area-inset-bottom)}
+.nav{background:none;color:#90959d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;position:relative;transition:.2s var(--spring)}.nav .nicon{font-size:22px}.nav.active{color:#168cff}.cart-count{position:absolute;top:8px;right:22%;min-width:18px;height:18px;border-radius:9px;background:#ff1878;color:#fff;font-size:10px;display:grid;place-items:center;padding:0 5px}
+.profile-fab{position:fixed;right:max(14px,calc((100vw - 470px)/2 + 14px));bottom:88px;width:46px;height:46px;border-radius:50%;background:#168cff;color:#fff;z-index:49;font-size:20px;box-shadow:0 12px 30px #0084ff50;transition:.2s var(--spring)}
+.toast{position:fixed;left:50%;transform:translateX(-50%) translateY(14px);bottom:92px;background:#f7f8fa;color:#111;padding:10px 14px;border-radius:12px;font-weight:800;font-size:13px;opacity:0;pointer-events:none;transition:.3s var(--spring);z-index:120;max-width:88%;text-align:center}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.modal{position:fixed;inset:0;background:#0000;z-index:100;display:flex;align-items:flex-end;justify-content:center;pointer-events:none;transition:background .28s}.modal.open{background:#000b;pointer-events:auto}.sheet{width:100%;max-width:470px;background:#181b20;border-radius:28px 28px 0 0;padding:16px;max-height:88vh;overflow:auto;transform:translateY(110%);transition:transform .42s var(--spring)}.modal.open .sheet{transform:none}.sheet img{width:100%;max-height:360px;object-fit:cover;border-radius:20px;background:#eef2f7}.sheet h2{margin:13px 0 6px}.sheet p{color:#afb5bd}.close{float:right;width:36px;height:36px;border-radius:50%;background:#2a2f36;color:#fff}.buy{width:100%;height:50px;border-radius:15px;background:#0d7df0;color:#fff;font-weight:900;transition:.2s var(--spring)}.ghost-share{height:44px;border-radius:12px;background:#2b3037;color:#fff;font-weight:800}.fly{position:fixed;z-index:200;width:18px;height:18px;border-radius:50%;background:#168cff;box-shadow:0 0 0 7px #168cff28;pointer-events:none;transition:transform .72s var(--spring),opacity .72s}.cart-count.bump{animation:bump .38s var(--spring)}
+.empty{grid-column:1/-1;padding:55px 20px;text-align:center;color:#9ca3af}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes bump{40%{transform:scale(1.32)}}
+@keyframes shim{0%{background-position:180% 0}100%{background-position:-20% 0}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(min-width:471px){body{padding:18px 0}.app{border-radius:28px;min-height:calc(100vh - 36px);box-shadow:0 30px 80px #0008}.bottom{bottom:18px;border-radius:0 0 28px 28px}.profile-fab{bottom:104px}}
+</style>
+</head>
+<body>
+<div class="app">
+<main id="homeView">
+  <section class="top">
+    <div class="topline">
+      <div>
+        <div class="brand"><div class="logo">O</div> Oson Market <span class="ver">v4</span></div>
+        <div class="location" onclick="toast('Доставка: Адрасман')">Адрасман · доставка по посёлку ▾</div>
+      </div>
+      <div class="wallet"><div class="pill">O 2 150</div><button class="chat" onclick="openSupport()">💬<span class="badge">1</span></button></div>
+    </div>
+    <div class="search"><span>⌕</span><input id="search" placeholder="Искать на Oson Market"><button id="clearSearch" class="clear-search" onclick="clearSearch()">×</button></div>
+    <div class="hero" id="heroAd">
+      <div class="hero-copy"><h1 id="heroTitle">Дарим подарки за добрые дела</h1><p id="heroSubtitle">Новые предложения каждую неделю</p><button class="cta" id="heroButton">Участвовать ›</button></div>
+    </div>
+  </section>
+
+  <section class="section"><div class="banner" id="feedAd"><small>OSON BONUS</small><h2 id="feedTitle">Больше выгоды в одном приложении</h2><p id="feedSubtitle">Скидки, бонусы и быстрая доставка по Адрасману.</p></div></section>
+
+  <div class="quick">
+    <div class="quick-item" onclick="setMode('all')"><div class="qicon">▦</div>Каталог</div>
+    <div class="quick-item" onclick="setMode('discount')"><div class="qicon">%</div>Скидки</div>
+    <div class="quick-item" onclick="setMode('fast')"><div class="qicon">⚡</div>Быстро</div>
+    <div class="quick-item" onclick="setView('bonus')"><div class="qicon">🎁</div>Подарки</div>
+    <div class="quick-item" onclick="setMode('featured')"><div class="qicon">★</div>Лучшее</div>
+    <div class="quick-item" onclick="setMode('new')"><div class="qicon">＋</div>Новинки</div>
+  </div>
+
+  <div class="title-row"><h2 id="listTitle">Для вас</h2><button onclick="resetFilters()">Все товары</button></div>
+  <div id="modeLabel" class="mode-label"></div>
+  <div class="chips" id="chips"><button class="chip active" data-cat="all">Все</button></div>
+  <div class="grid" id="grid"><div class="skeleton"></div><div class="skeleton"></div></div>
+</main>
+
+<main class="profile-view" id="profileView">
+  <div class="profile-head"><div class="person"><div class="avatar">O</div><div><h2>Oson Market</h2><p>Ваш профиль</p></div></div><button class="chat" onclick="openSupport()">💬</button></div>
+  <div class="profile-cards">
+    <div class="pcard" onclick="showFavorites()">♡<b>Избранное</b><span id="favLabel">0 товаров</span></div>
+    <div class="pcard" onclick="setView('cart')">🛍<b>Корзина</b><span id="cartLabel">0 товаров</span></div>
+    <div class="pcard" onclick="setView('bonus')">⭐<b>Бонусы</b><span>Предложения</span></div>
+  </div>
+  <div class="big-card"><h3>Покупайте выгоднее</h3><p>Сохраняйте любимые товары и возвращайтесь к ним позже.</p><button class="cta2" onclick="showFavorites()">Открыть избранное</button><div class="money">💸</div></div>
+  <div class="finance"><h3>Oson бонусы</h3><div class="finance-row"><div class="fbox"><small>Ваш баланс</small><b>2 150 баллов</b></div><div class="fbox"><small>Экономия</small><b>до 20%</b></div></div></div>
+  <div class="recent"><h3>Вы смотрели</h3><div class="recent-strip" id="recentStrip"></div></div>
+</main>
+
+<main class="bonus-view" id="bonusView"><div class="bonus-wrap">
+  <div class="title-row" style="margin:0 0 14px"><h2>Бонусы и акции</h2><button onclick="setView('home')">Назад</button></div>
+  <div class="bonus-card"><h2>OSON BONUS</h2><p>Добавляйте товары в избранное, следите за скидками и новыми предложениями.</p><button onclick="setMode('discount')">Смотреть скидки</button></div>
+  <div class="bonus-card" style="background:linear-gradient(135deg,#0b8cff,#00b77b)"><h2>Новинки</h2><p>Самые свежие товары магазина в одном разделе.</p><button onclick="setMode('new')">Открыть новинки</button></div>
+</div></main>
+
+<main class="cart-view" id="cartView"><h2>Корзина</h2><div id="cartItems"></div><div class="checkout"><button id="checkoutBtn" onclick="checkout()">Оформить заказ · <span id="cartTotal">0 с.</span></button></div></main>
+
+<nav class="bottom">
+  <button class="nav active" data-view="home"><span class="nicon">⌂</span><span>Главная</span></button>
+  <button class="nav" id="searchNav"><span class="nicon">⌕</span><span>Поиск</span></button>
+  <button class="nav" data-view="bonus"><span class="nicon">◉</span><span>Бонусы</span></button>
+  <button class="nav" id="favNav"><span class="nicon">♡</span><span>Избранное</span></button>
+  <button class="nav" data-view="cart"><span class="nicon">🛍</span><span>Корзина</span><span class="cart-count" id="cartBadge">0</span></button>
+</nav>
+<button class="profile-fab" onclick="setView('profile')" aria-label="Профиль">◉</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="sheet">
+  <button class="close" onclick="closeModal()">×</button><img id="mImg"><h2 id="mName"></h2><div class="price" id="mPrice"></div><div id="mCalc" style="color:#43df94;font-weight:850;margin-top:5px"></div><p id="mDesc"></p>
+  <div style="display:grid;grid-template-columns:122px 1fr;gap:10px;align-items:center;margin:14px 0">
+    <div class="qty" style="margin:0"><button onclick="modalQty(-1)">−</button><b id="mQty">1</b><button onclick="modalQty(1)">+</button></div>
+    <button class="ghost-share" onclick="shareProduct()">↗ Поделиться</button>
+  </div>
+  <button class="buy" id="mBuy">Добавить в корзину</button>
+</div></div>
+
+<script>
+'use strict';
+const SUPABASE_URL="https://offfszmraudijnbrxtwx.supabase.co";
+const SUPABASE_KEY="sb_publishable_3caLy5hf8WzH_L-TzVm_Hw_WEYIXZCq";
+const WHATSAPP="992928041517";
+const HEADERS={"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Accept":"application/json"};
+const STORE_KEY="oson_market_state_v4";
+
+let products=[], ads=[], mode="all", activeCat="all", query="", current=null, modalQtyN=1;
+let state={cart:{},fav:[],recent:[]};
+try{state={...state,...JSON.parse(localStorage.getItem(STORE_KEY)||"{}")}}catch(_){}
+if(!state.cart)state.cart={};if(!Array.isArray(state.fav))state.fav=[];if(!Array.isArray(state.recent))state.recent=[];
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const js=s=>JSON.stringify(String(s));
+const money=n=>new Intl.NumberFormat("ru-RU",{maximumFractionDigits:2}).format(Number(n||0))+" с.";
+const norm=s=>String(s??"").toLowerCase().replace(/ё/g,"е");
+const discount=p=>p.old&&p.old>p.price?Math.round((1-p.price/p.old)*100):0;
+function save(){localStorage.setItem(STORE_KEY,JSON.stringify(state));updateCounts()}
+function productById(id){return products.find(p=>String(p.id)===String(id))}
+
+async function getJSON(url){
+  const c=new AbortController();const timer=setTimeout(()=>c.abort(),15000);
+  try{const r=await fetch(url,{headers:HEADERS,signal:c.signal});const t=await r.text();let j=[];try{j=t?JSON.parse(t):[]}catch{}if(!r.ok)throw new Error(j?.message||("HTTP "+r.status));return j}
+  finally{clearTimeout(timer)}
+}
+async function loadData(){
+  try{
+    const [pRows,aRows]=await Promise.all([
+      getJSON(`${SUPABASE_URL}/rest/v1/products?select=id,name,description,category,price,old_price,stock,image_url,image_urls,rating,featured,created_at&active=eq.true&stock=gt.0&order=featured.desc,created_at.desc`),
+      getJSON(`${SUPABASE_URL}/rest/v1/ads?select=*&active=eq.true&order=sort_order.asc,created_at.desc`)
+    ]);
+    products=pRows.map(p=>({id:String(p.id),name:p.name||"Без названия",description:p.description||"",category:p.category||"Другое",price:Number(p.price||0),old:Number(p.old_price||0),stock:Number(p.stock||0),rating:Number(p.rating||5),featured:!!p.featured,created_at:p.created_at||"",img:p.image_url||(Array.isArray(p.image_urls)?p.image_urls[0]:"")||""}));
+    ads=aRows||[];
+    cleanupState();renderCategories();applyAds();render();updateCounts();
+  }catch(e){
+    $("grid").innerHTML='<div class="empty">Не удалось загрузить товары.<br><button class="cta" style="margin-top:12px" onclick="loadData()">Повторить</button></div>';
+    toast("Не удалось загрузить каталог");
+  }
+}
+function cleanupState(){
+  const alive=new Set(products.map(p=>String(p.id)));
+  Object.keys(state.cart).forEach(id=>{if(!alive.has(String(id)))delete state.cart[id]});
+  state.fav=state.fav.filter(id=>alive.has(String(id)));
+  state.recent=state.recent.filter(id=>alive.has(String(id)));
+  save();
+}
+function applyAds(){
+  const now=Date.now();
+  const live=ads.filter(a=>(!a.starts_at||new Date(a.starts_at).getTime()<=now)&&(!a.ends_at||new Date(a.ends_at).getTime()>=now));
+  const hero=live.find(a=>a.placement==="hero")||live[0];
+  const feed=live.find(a=>a.placement==="feed");
+  if(hero){
+    $("heroTitle").textContent=hero.title||"Oson Market";
+    $("heroSubtitle").textContent=hero.subtitle||"";
+    $("heroButton").textContent=(hero.button_text||"Смотреть")+" ›";
+    $("heroAd").style.backgroundImage=`linear-gradient(90deg,rgba(5,10,20,.5),rgba(5,10,20,.1)),url("${hero.image_url||""}")`;
+    $("heroButton").onclick=()=>{document.querySelector(".grid")?.scrollIntoView({behavior:"smooth"});};
+  }else $("heroButton").onclick=()=>setMode("featured");
+  if(feed){
+    $("feedTitle").textContent=feed.title||"Предложение";
+    $("feedSubtitle").textContent=feed.subtitle||"";
+    $("feedAd").style.backgroundImage=`linear-gradient(90deg,rgba(10,5,18,.55),rgba(10,5,18,.06)),url("${feed.image_url||""}")`;
+  }
+}
+function renderCategories(){
+  const cats=[...new Set(products.map(p=>p.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b,"ru"));
+  $("chips").innerHTML=`<button class="chip ${activeCat==="all"?"active":""}" data-cat="all">Все</button>`+cats.map(c=>`<button class="chip ${activeCat===c?"active":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+  $("chips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{activeCat=b.dataset.cat;mode="all";query="";$("search").value="";$("clearSearch").style.display="none";renderCategories();render();});
+}
+function filtered(){
+  let list=products.filter(p=>(activeCat==="all"||p.category===activeCat)&&(!query||norm(p.name+" "+p.category+" "+p.description).includes(norm(query))));
+  if(mode==="discount")list=list.filter(p=>discount(p)>0).sort((a,b)=>discount(b)-discount(a));
+  else if(mode==="fast")list=list.filter(p=>p.stock>0&&p.stock<=10).sort((a,b)=>a.stock-b.stock);
+  else if(mode==="featured")list=list.filter(p=>p.featured).sort((a,b)=>b.rating-a.rating);
+  else if(mode==="new")list=[...list].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+  else if(mode==="fav")list=list.filter(p=>state.fav.includes(String(p.id)));
+  return list;
+}
+function render(){
+  const list=filtered();const labels={all:"Для вас",discount:"Скидки",fast:"Заканчивается",featured:"Лучшее",new:"Новинки",fav:"Избранное"};
+  $("listTitle").textContent=labels[mode]||"Для вас";
+  $("modeLabel").style.display=mode==="all"?"none":"block";
+  $("modeLabel").textContent=mode==="fast"?"Товары с небольшим остатком":mode==="fav"?"Сохранённые товары":"";
+  $("grid").innerHTML=list.map((p,i)=>`<article class="card" style="animation-delay:${Math.min(i,10)*24}ms" onclick='openProduct(${js(p.id)})'>
+    <div class="image-wrap"><img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.opacity=.15">
+      <button class="fav ${state.fav.includes(String(p.id))?"on":""}" onclick='event.stopPropagation();toggleFav(${js(p.id)},this)'>${state.fav.includes(String(p.id))?"♥":"♡"}</button>
+    </div>
+    <div class="card-body"><div><span class="price">${money(p.price)}</span>${p.old>p.price?`<span class="old">${money(p.old)}</span>`:""}</div>
+      <div class="stock">${p.stock} шт осталось${discount(p)>0?" · -"+discount(p)+"%":""}</div>
+      <div class="name">${esc(p.name)}</div><div class="meta"><span class="star">★</span> ${p.rating||5} · доставка по Адрасману</div>
+      <button class="add ${state.cart[p.id]?"incart":""}" onclick='event.stopPropagation();addCart(${js(p.id)})'>${state.cart[p.id]?"В корзине · "+state.cart[p.id]:"В корзину"}</button>
+    </div></article>`).join("")||'<div class="empty">В этом разделе пока нет товаров</div>';
+}
+function toggleFav(id,btn){id=String(id);state.fav=state.fav.includes(id)?state.fav.filter(x=>x!==id):[...state.fav,id];save();if(btn){btn.classList.add("bump");setTimeout(()=>btn.classList.remove("bump"),400)}render();toast(state.fav.includes(id)?"Добавлено в избранное":"Убрано из избранного")}
+function addCart(id,amount=1,animateFrom=null){id=String(id);const p=productById(id);if(!p)return;const have=Number(state.cart[id]||0), add=Math.max(1,Number(amount||1));if(have+add>p.stock){toast("Доступно только "+p.stock+" шт.");return}state.cart[id]=have+add;save();render();if(animateFrom)flyToCart(animateFrom);toast("Добавлено в корзину")}
+function updateModalCalc(){if(!current)return;$("mQty").textContent=modalQtyN;$("mCalc").textContent=modalQtyN>1?`${modalQtyN} × ${money(current.price)} = ${money(current.price*modalQtyN)}`:""}
+function modalQty(d){if(!current)return;modalQtyN=Math.min(Math.max(1,modalQtyN+d),Math.max(1,current.stock));updateModalCalc()}
+function flyToCart(fromEl){
+  try{const from=(fromEl||$("mBuy")).getBoundingClientRect();const to=$("cartBadge").parentElement.getBoundingClientRect();const dot=document.createElement("div");dot.className="fly";dot.style.left=(from.left+from.width/2-9)+"px";dot.style.top=(from.top+from.height/2-9)+"px";document.body.appendChild(dot);requestAnimationFrame(()=>{dot.style.transform=`translate(${to.left+to.width/2-(from.left+from.width/2)}px,${to.top+to.height/2-(from.top+from.height/2)}px) scale(.35)`;dot.style.opacity="0"});setTimeout(()=>{dot.remove();$("cartBadge").classList.remove("bump");void $("cartBadge").offsetWidth;$("cartBadge").classList.add("bump")},720)}catch(_){}
+}
+function openProduct(id){const p=productById(id);if(!p)return;id=String(id);current=p;modalQtyN=1;state.recent=[id,...state.recent.filter(x=>x!==id)].slice(0,8);save();$("mImg").src=p.img;$("mName").textContent=p.name;$("mPrice").textContent=money(p.price);$("mDesc").textContent=p.description||`Рейтинг ${p.rating}. Осталось ${p.stock} шт.`;updateModalCalc();$("mBuy").onclick=()=>{addCart(id,modalQtyN,$("mBuy"));setTimeout(closeModal,280)};$("modal").classList.add("open");document.body.style.overflow="hidden"}
+function closeModal(){$("modal").classList.remove("open");document.body.style.overflow=""}
+function updateCounts(){const c=Object.values(state.cart).reduce((a,b)=>a+Number(b||0),0);$("cartBadge").textContent=c;$("cartLabel").textContent=c+" товаров";$("favLabel").textContent=state.fav.length+" товаров"}
+function renderCart(){
+  const ids=Object.keys(state.cart).filter(id=>state.cart[id]>0&&productById(id));let total=0;
+  $("cartItems").innerHTML=ids.length?ids.map(id=>{const p=productById(id),q=state.cart[id];total+=p.price*q;return `<div class="cart-item"><img src="${esc(p.img)}" onclick='openProduct(${js(id)})'><div class="ci"><div class="ci-name">${esc(p.name)}</div><div class="price" style="font-size:17px;margin-top:5px">${money(p.price)}</div><div class="ci-unit">за 1 шт.</div>${q>1?`<div class="ci-sum">${q} × ${money(p.price)} = ${money(p.price*q)}</div>`:""}<div class="qty"><button onclick='qty(${js(id)},-1)'>−</button><b>${q}</b><button onclick='qty(${js(id)},1)'>+</button></div></div><button class="remove" aria-label="Удалить" onclick='removeCart(${js(id)})'>✕</button></div>`}).join(""):'<div class="empty">Корзина пока пустая</div>';
+  $("cartTotal").textContent=money(total);$("checkoutBtn").disabled=!ids.length;$("checkoutBtn").style.opacity=ids.length?"1":".45";
+}
+function qty(id,d){id=String(id);const p=productById(id);if(!p)return;const n=(state.cart[id]||0)+d;if(n<=0)delete state.cart[id];else if(n<=p.stock)state.cart[id]=n;else toast("Доступно только "+p.stock+" шт.");save();renderCart();render()}
+function removeCart(id){delete state.cart[String(id)];save();renderCart();render()}
+function renderRecent(){$("recentStrip").innerHTML=state.recent.map(id=>{const p=productById(id);return p?`<div class="mini" onclick='openProduct(${js(id)})'><img src="${esc(p.img)}"><b>${money(p.price)}</b><span>${esc(p.name)}</span></div>`:""}).join("")||'<span style="color:#9ca3af">Откройте товар — он появится здесь</span>'}
+function setView(v){
+  ["home","profile","cart","bonus"].forEach(x=>$(x+"View").style.display=x===v?"block":"none");
+  document.querySelectorAll(".nav[data-view]").forEach(n=>n.classList.toggle("active",n.dataset.view===v));
+  if(v==="cart")renderCart();if(v==="profile")renderRecent();window.scrollTo({top:0,behavior:"smooth"});
+}
+function setMode(m){mode=m;activeCat="all";query="";$("search").value="";$("clearSearch").style.display="none";setView("home");renderCategories();render();setTimeout(()=>$("grid").scrollIntoView({behavior:"smooth",block:"start"}),60)}
+function showFavorites(){setMode("fav")}
+function resetFilters(){setMode("all")}
+function clearSearch(){query="";$("search").value="";$("clearSearch").style.display="none";mode="all";render()}
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>e.classList.remove("show"),1900)}
+async function shareProduct(){
+  if(!current)return;
+  const base=/^https?:$/.test(location.protocol)?`${location.origin}${location.pathname}`:"";
+  const url=base?`${base}?p=${encodeURIComponent(current.id)}`:"";
+  const text=`Смотрите товар в Oson Market:\n${current.name} — ${money(current.price)}`+(url?`\n${url}`:"");
+  if(navigator.share){try{await navigator.share(url?{title:current.name,text,url}:{title:current.name,text})}catch(_){}}
+  else{try{await navigator.clipboard.writeText(text);toast("Ссылка скопирована")}catch(_){toast("Поделиться можно после публикации сайта")}}
+}
+function openSupport(){location.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent("Здравствуйте! Пишу из Oson Market.")}
+function checkout(){
+  const ids=Object.keys(state.cart).filter(id=>state.cart[id]>0&&productById(id));if(!ids.length){toast("Корзина пустая");return}
+  let total=0;const lines=ids.map(id=>{const p=productById(id),q=state.cart[id];total+=p.price*q;return `• ${p.name} — ${q} × ${money(p.price)}`});
+  const text=`Здравствуйте! Хочу оформить заказ в Oson Market:\n\n${lines.join("\n")}\n\nИтого: ${money(total)}\nАдрасман.`;
+  location.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text);
+}
+$("search").addEventListener("input",e=>{query=e.target.value;mode="all";$("clearSearch").style.display=query?"block":"none";render()});
+$("searchNav").onclick=()=>{setView("home");setTimeout(()=>$("search").focus(),120)};
+$("favNav").onclick=showFavorites;
+document.querySelectorAll(".nav[data-view]").forEach(n=>n.onclick=()=>setView(n.dataset.view));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+updateCounts();loadData().then(()=>{try{const id=new URLSearchParams(location.search).get("p");if(id)openProduct(id)}catch(_){}});
+</script>
+</body>
+</html>
