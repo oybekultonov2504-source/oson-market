@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Oson Market Admin v8</title>
+<title>Oson Market Admin v9</title>
 <style>
 :root{--bg:#090b0f;--panel:#15191f;--panel2:#1d222a;--line:#2b313b;--text:#f7f9fc;--muted:#939ba7;--blue:#168cff;--green:#27d980;--red:#ff5a70;--spring:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
@@ -29,9 +29,9 @@ main{max-width:1080px;margin:auto;padding:18px}.view{display:none}.view.active{d
 </head>
 <body>
 <div class="progress" id="progress"></div>
-<div class="auth" id="auth"><form class="authbox" onsubmit="login(event)"><h1>Oson Market Admin <span class="version">v8</span></h1><p>Вход только для администратора проекта.</p><div class="field"><label>Email</label><input id="email" type="email" value="oybekultonov2504@gmail.com" required></div><div class="field"><label>Пароль</label><input id="password" type="password" required></div><button class="primary" id="loginBtn" style="width:100%;margin-top:14px">Войти</button><div class="err" id="authErr"></div></form></div>
-<header><div class="wrap"><div class="head"><div class="brand"><div class="logo">O</div>OSON MARKET <span style="color:#777;font-weight:600">Admin</span><span class="version">v8</span></div><div class="pill" id="status">Подключение...</div></div>
-<nav><button class="tab active" data-tab="dashboard">Обзор</button><button class="tab" data-tab="products">Товары</button><button class="tab" data-tab="ads">Реклама</button><button class="tab" data-tab="sales">Продажи 7 дней</button><button class="tab" data-tab="settings">Настройки</button></nav></div></header>
+<div class="auth" id="auth"><form class="authbox" onsubmit="login(event)"><h1>Oson Market Admin <span class="version">v9</span></h1><p>Ð’Ñ…Ð¾Ð´ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð´Ð»Ñ Ð°Ð´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð° Ð¿Ñ€Ð¾ÐµÐºÑ‚Ð°.</p><div class="field"><label>Email</label><input id="email" type="email" value="oybekultonov2504@gmail.com" required></div><div class="field"><label>ÐŸÐ°Ñ€Ð¾Ð»ÑŒ</label><input id="password" type="password" required></div><button class="primary" id="loginBtn" style="width:100%;margin-top:14px">Ð’Ð¾Ð¹Ñ‚Ð¸</button><div class="err" id="authErr"></div></form></div>
+<header><div class="wrap"><div class="head"><div class="brand"><div class="logo">O</div>OSON MARKET <span style="color:#777;font-weight:600">Admin</span><span class="version">v9</span></div><div class="pill" id="status">ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ...</div></div>
+<nav><button class="tab active" data-tab="dashboard">ÐžÐ±Ð·Ð¾Ñ€</button><button class="tab" data-tab="products">Ð¢Ð¾Ð²Ð°Ñ€Ñ‹</button><button class="tab" data-tab="ads">Ð ÐµÐºÐ»Ð°Ð¼Ð°</button><button class="tab" data-tab="sales">ÐŸÑ€Ð¾Ð´Ð°Ð¶Ð¸ 7 Ð´Ð½ÐµÐ¹</button><button class="tab" data-tab="settings">ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸</button></nav></div></header>
 <main>
 <section class="view active" id="dashboard">
-<div class="row"><h1>Панель управления</h1><button class="primary" onclick="openProduct()">+ Товар���ѽ��𽑥��(�؁�����􉍅ɑ̈��؁�������хЈ��������􉝽Q�����ɽ�Ս�̜����͵����B�B�B�B�FB�B��͵����񈁥����Aɽ�Ս�̈����𽑥���؁�������хЈ��������􉝽Q������̜����͵����BCB�FB�B�B�B�F<�FB�B�B�B�B�B��͵����񈁥�����̈����𽑥���؁�������хЈ��������􉝽Q�����ɽ�Ս�̜����͵����B{FFB�FB�B��͵����񈁥����Mѽ�������𽑥���؁�������хЈ��������􉝽Q����ͅ��̜����͵����BFB�B�B�B؃B�B��܃B�B�B�B��͵����񈁥����M���̈����𽑥��𽑥��(�؁��������������؁������ɽ܈���屔􉵅ɝ������ѽ���������́��屔􉵅ɝ������BB�FB�B�B�B�B�BԃFB�B�B�FF,������ѽ�������􉝡��Ј��������􉱽��������B{B�B�B�B�B�FF0
+<div class="row"><h1>ÐŸÐ°Ð½ÐµÐ»ÑŒ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ñ</h1><button class="primary" onclick="openProduct()">+ Ð¢Ð¾Ð²Ð°Ñ€ð½‰ÕÑÑ½¸øð½‘¥Øø(ñ‘¥Ø±…ÍÌô‰…É‘Ìˆøñ‘¥Ø±…ÍÌô‰ÍÑ…Ðˆ½¹±¥¬ô‰½Q…ˆ ÁÉ½‘ÕÑÌœ¤ˆøñÍµ…±°ûB‹BûBËBÃFBûBÈð½Íµ…±°øñˆ¥ô‰ÍÑAÉ½‘ÕÑÌˆøÀð½ˆøð½‘¥Øøñ‘¥Ø±…ÍÌô‰ÍÑ…Ðˆ½¹±¥¬ô‰½Q…ˆ …‘Ìœ¤ˆøñÍµ…±°ûBCBëFBãBËB÷BÃF<ƒFB×BëBïBÃBóBÀð½Íµ…±°øñˆ¥ô‰ÍÑ‘ÌˆøÀð½ˆøð½‘¥Øøñ‘¥Ø±…ÍÌô‰ÍÑ…Ðˆ½¹±¥¬ô‰½Q…ˆ ÁÉ½‘ÕÑÌœ¤ˆøñÍµ…±°ûB{FFBÃFBûBèð½Íµ…±°øñˆ¥ô‰ÍÑMÑ½¬ˆøÀð½ˆøð½‘¥Øøñ‘¥Ø±…ÍÌô‰ÍÑ…Ðˆ½¹±¥¬ô‰½Q…ˆ Í…±•Ìœ¤ˆøñÍµ…±°ûBFBûBÓBÃBØƒBßBÀ€ÜƒBÓB÷B×Bäð½Íµ…±°øñˆ¥ô‰ÍÑM…±•ÌˆøÀð½ˆøð½‘¥Øøð½‘¥Øø(ñ‘¥Ø±…ÍÌô‰Á…¹•°ˆøñ‘¥Ø±…ÍÌô‰É½ÜˆÍÑå±”ô‰µ…É¥¸µ‰½ÑÑ½´èÄÁÁàˆøñ ÌÍÑå±”ô‰µ…É¥¸èÀˆûBBûFBïB×BÓB÷BãBÔƒFBûBËBÃFF,ð½ Ìøñ‰ÕÑÑ½¸±…ÍÌô‰¡½ÍÐˆ½¹±¥¬ô‰±½…‘±° ¤ˆûB{BÇB÷BûBËBãFF0
